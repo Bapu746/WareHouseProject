@@ -91,6 +91,50 @@
 							<!-- Error message -->
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-2">
+							<label for="uomOb"> UOM MODEL:</label>
+						</div>
+						<div class="col-4">
+							<form:select class="form-control" path="uomOb.uomId">
+								<form:option value="">--Select--</form:option>
+								<form:options items="${uomMap}"/>
+							</form:select>
+						</div>
+						<div class="col-4">
+							<!-- Error message -->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-2">
+							<label for="ordOb"> ORDER METHOD CODE(SALE):</label>
+						</div>
+						<div class="col-4">
+							<form:select class="form-control" path="ordSaleOb.ordId">
+								<form:option value="">--Select--</form:option>
+								<form:options items="${ordSaleMap}"/>
+							</form:select>
+						</div>
+						<div class="col-4">
+							<!-- Error message -->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-2">
+							<label for="ordOb"> ORDER METHOD CODE(PURCHASE):</label>
+						</div>
+						<div class="col-4">
+							<form:select class="form-control" path="ordPurOb.ordId">
+								<form:option value="">--Select--</form:option>
+								<form:options items="${ordPurMap}"/>
+							</form:select>
+						</div>
+						<div class="col-4">
+							<!-- Error message -->
+						</div>
+					</div>
 					<br>
 					<div class="row">
 						<div class="col-2">

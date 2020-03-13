@@ -34,6 +34,18 @@
 			<td>${part.baseCurrency}</td>
 		</tr>
 		<tr>
+			<th>UOM MODEL</th>
+			<td>${part.uomOb.uomModel}</td>
+		</tr>
+		<tr>
+			<th>ORDER CODE(SALE)</th>
+			<td>${part.ordSaleOb.ordCode}</td>
+		</tr>
+		<tr>
+			<th>ORDER CODE(PURCHASE)</th>
+			<td>${part.ordPurOb.ordCode}</td>
+		</tr>
+		<tr>
 			<th>DESCRIPTION</th>
 			<td>${part.desc}</td>
 		</tr>

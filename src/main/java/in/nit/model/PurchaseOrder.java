@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,10 @@ public class PurchaseOrder {
 	private String defStatus;
 	@Column(name="orddesc")
 	private String desc;
+	@ManyToOne
+	@JoinColumn(name="sidFk")
+	private ShipmentType sh;
+	
 	public PurchaseOrder() {
 		super();
 	}
@@ -69,10 +75,19 @@ public class PurchaseOrder {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	public ShipmentType getSh() {
+		return sh;
+	}
+	public void setSh(ShipmentType sh) {
+		this.sh = sh;
+	}
 	@Override
 	public String toString() {
 		return "PurchaseOrder [ordId=" + ordId + ", ordCode=" + ordCode + ", refNum=" + refNum + ", qualityCheck="
-				+ qualityCheck + ", defStatus=" + defStatus + ", desc=" + desc + "]";
+				+ qualityCheck + ", defStatus=" + defStatus + ", desc=" + desc + ", sh=" + sh + "]";
 	}
+	
+
+
 	
 }

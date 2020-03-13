@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,15 @@ public class Part {
 	private String baseCurrency;
 	@Column(name="prtdesc")
 	private  String desc;
+	@ManyToOne
+	@JoinColumn(name="uomIdFk")
+	private Uom uomOb;
+	@ManyToOne
+	@JoinColumn(name="ordIdSaleFk")
+	private OrderMethod ordSaleOb;
+	@ManyToOne
+	@JoinColumn(name="ordIdPurFk")
+	private OrderMethod ordPurOb;
 	public Part() {
 		super();
 	}
@@ -87,11 +98,43 @@ public class Part {
 		this.desc = desc;
 	}
 
-		@Override
-	public String toString() {
-		return "Part [partId=" + partId + ", width=" + width + ", length=" + length + ", height=" + height
-				+ ", desc=" + desc + "]";
+	public Uom getUomOb() {
+		return uomOb;
 	}
+
+	public void setUomOb(Uom uomOb) {
+		this.uomOb = uomOb;
+	}
+
+	public OrderMethod getOrdSaleOb() {
+		return ordSaleOb;
+	}
+
+	public void setOrdSaleOb(OrderMethod ordSaleOb) {
+		this.ordSaleOb = ordSaleOb;
+	}
+
+	public OrderMethod getOrdPurOb() {
+		return ordPurOb;
+	}
+
+	public void setOrdPurOb(OrderMethod ordPurOb) {
+		this.ordPurOb = ordPurOb;
+	}
+
+	@Override
+	public String toString() {
+		return "Part [partId=" + partId + ", partCode=" + partCode + ", width=" + width + ", length=" + length
+				+ ", height=" + height + ", baseCurrency=" + baseCurrency + ", desc=" + desc + ", uomOb=" + uomOb
+				+ ", ordSaleOb=" + ordSaleOb + ", ordPurOb=" + ordPurOb + "]";
+	}
+	
+
+	
+	
+
+	
+
 	
 
 }

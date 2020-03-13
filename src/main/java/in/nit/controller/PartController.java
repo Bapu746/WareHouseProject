@@ -3,6 +3,7 @@ package in.nit.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nit.model.Part;
+import in.nit.service.IOrderMethodService;
 import in.nit.service.IPartService;
+import in.nit.service.IUomService;
+import in.nit.utils.CommonUtil;
 import in.nit.view.PartExcelView;
 import in.nit.view.PartPdfView;
 @Controller
@@ -21,9 +25,27 @@ import in.nit.view.PartPdfView;
 public class PartController {
 	@Autowired
 	private IPartService service;
+	@Autowired
+	private IUomService uomService;
+	@Autowired
+	private IOrderMethodService ordService;
+	private void CommonUi(Model model) {
+		List<Object[]> uomList=uomService.getUomIdAndUomModel();
+		Map<Integer,String> uomMap=CommonUtil.conver(uomList);
+		model.addAttribute("uomMap", uomMap);
+		
+		List<Object[]> ordSaleList=ordService.getIdAndOrderCode("sale");
+		Map<Integer,String> ordSaleMap=CommonUtil.conver(ordSaleList);
+		model.addAttribute("ordSaleMap", ordSaleMap);
+		List<Object[]> ordPurList=ordService.getIdAndOrderCode("purchase");
+		Map<Integer,String> ordPurMap=CommonUtil.conver(ordPurList);
+		model.addAttribute("ordPurMap", ordPurMap);
+		
+	}
 	@RequestMapping("/register")
 	public String showRegPage(Model model) {
 		model.addAttribute("part",new Part());
+		CommonUi(model);
 		return "PartRegister";
 	}
 	@RequestMapping(value="/save",method=POST)
@@ -32,6 +54,7 @@ public class PartController {
 		String message="Part '"+id+"'saved";
 		model.addAttribute("message", message);
 		model.addAttribute("part",new Part());
+		CommonUi(model);
 		return "PartRegister";
 	}
 	@RequestMapping("/all")
@@ -54,6 +77,7 @@ public class PartController {
 	public String showEditPage(@RequestParam("prtid")Integer id,Model model) {
 		Part part=service.getOnePart(id);
 		model.addAttribute("part",part);
+		CommonUi(model);
 		return "PartEdit";
 	}
 	@RequestMapping(value="/update",method=POST)

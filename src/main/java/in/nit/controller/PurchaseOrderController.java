@@ -1,18 +1,21 @@
 package in.nit.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nit.model.PurchaseOrder;
 import in.nit.service.IPurchaseOrderService;
+import in.nit.service.IShipmentTypeService;
 import in.nit.view.PuchaseOrderExcelView;
 import in.nit.view.PurchaseOrderPdfView;
 
@@ -22,10 +25,17 @@ public class PurchaseOrderController {
 	@Autowired
 	private IPurchaseOrderService service;
 	
-	
+	@Autowired
+	private IShipmentTypeService shipmentService; 
+	private void commonUi(List<Object[]> list) {
+		
+		
+	}
 	@RequestMapping("/register")
 	public String showRegPage(Model model) {
-		model.addAttribute("purchaseOrder",new PurchaseOrder());
+		PurchaseOrder po=new PurchaseOrder();
+		po.setDefStatus("OPEN");
+		model.addAttribute("purchaseOrder",po);
 		return "PurchaseOrderRegister";
 	}
 
@@ -34,7 +44,9 @@ public class PurchaseOrderController {
 		Integer id=service.savaPurchaseOrder(purchaseOrder);
 		String message="Purchase Order '"+id+"'saved";
 		model.addAttribute("message", message);
-		model.addAttribute("purchaseOrder",new PurchaseOrder());
+		PurchaseOrder po=new PurchaseOrder();
+		po.setDefStatus("OPEN");
+		model.addAttribute("purchaseOrder",po);
 		return "PurchaseOrderRegister";
 	}
 	@RequestMapping("/all")

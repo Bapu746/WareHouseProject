@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="shiptab")
+@Table(name="shipmenttab")
 public class ShipmentType  {
 	@Id
 	@GeneratedValue

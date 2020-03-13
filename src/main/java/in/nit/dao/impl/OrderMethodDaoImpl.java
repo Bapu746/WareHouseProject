@@ -44,5 +44,11 @@ public class OrderMethodDaoImpl implements IOrderMethodDao {
 	public List<Object[]> getOneOrderMethodTypeCount() {
 		return (List<Object[]>) ht.find("select ordType,count(ordType) from in.nit.model.OrderMethod group by ordType");
 	}	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Object[]> getIdAndOrderCode(String ordMode) {
+		String hql="select ordId,ordCode from in.nit.model.OrderMethod where ordMode='"+ordMode+"'";
+		return (List<Object[]>) ht.find(hql);
+	}
 
 }

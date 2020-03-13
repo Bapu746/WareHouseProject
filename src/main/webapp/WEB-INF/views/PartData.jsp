@@ -5,33 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style type="text/css">
-th, td {
-	padding: 15px;
-	text-align: center;
-}
 
-th {
-	background-color: green;
-	color: white;
-	font-size: 12pt;
-}
-</style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="UserMenu.jsp" %>
 	<c:choose>
 		<c:when test="${!empty list }">
 
@@ -47,6 +28,9 @@ th {
 								<th>WIDTH</th>
 								<th>LENGTH</th>
 								<th>BASE CURRENCY</th>
+								<th>UOM MODEL</th>
+								<th>ORDER CODE(SALE)</th>
+								<th>ORDER CODE(PURCHASE)</th>
 								<th>DESCRIPTION</th>
 								<th colspan="3">OPERATION</th>
 							</tr>
@@ -61,8 +45,11 @@ th {
 									<td>${ob.height}</td>
 									<td>${ob. length}</td>
 									<td>${ob.baseCurrency}</td>
+									<td>${ob.uomOb.uomModel}</td>
+									<td>${ob.ordSaleOb.ordCode}</td>
+									<td>${ob.ordPurOb.ordCode}</td>
 									<td>${ob.desc}</td>
-									<td colspan="3"><a href="delete?prtid=${ob.partId}"
+									<td colspan="5"><a href="delete?prtid=${ob.partId}"
 										class="btn btn-info">DELETE</a> <a
 										href="edit?prtid=${ob.partId}" class="btn btn-info">EDIT</a> <a
 										href="view?prtid=${ob.partId}" class="btn btn-info">VIEW</a></td>
